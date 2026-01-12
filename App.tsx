@@ -8,6 +8,7 @@ import CourseView from './components/CourseView';
 import Resources from './components/Resources';
 import Forum from './components/Forum';
 import About from './components/About';
+import AdminPanel from './components/AdminPanel';
 import { UserProgress } from './types';
 
 const App: React.FC = () => {
@@ -27,6 +28,7 @@ const App: React.FC = () => {
             <Route path="/resources" element={<Resources />} />
             <Route path="/forum" element={<Forum />} />
             <Route path="/about" element={<About />} />
+            <Route path="/admin" element={<AdminPanel />} />
           </Routes>
         </main>
 

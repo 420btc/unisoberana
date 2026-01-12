@@ -214,8 +214,8 @@ export const COURSES: Course[] = [
       },
       { 
         id: 'l2', 
-        title: '2. República Errante Menda Lerenda', 
-        content: 'Caso español de 1999. Un precedente jurídico donde se argumentó que la soberanía reside en el individuo, no en el territorio. Emitieron pasaportes y documentos propios. Lección: El humor y la sátira como armas legales para deslegitimar la burocracia estatal.' 
+        title: '2. República Errante Menda Lerenda (REML)', 
+        content: 'Proclamada en 1999 e inscrita en el Registro de la Propiedad Intelectual de Barcelona, la REML define al individuo como una república independiente en sí misma. "Menda Lerenda" es la expresión latina (yo mismo) que designa la soberanía personal. Su territorio es la superficie física que ocupa el soberano en cada momento ("territorio móvil"), haciendo inviolable su contorno físico. Documentación: Emiten pasaportes y carnets diplomáticos que acreditan al portador como sujeto de Derecho Internacional, no sujetos a la jurisdicción ordinaria estatal, aunque su eficacia práctica depende de la capacidad del soberano para defender su estatus.' 
       },
       { 
         id: 'l3', 

@@ -1,16 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GLOSSARY, TREATY_TEXTS } from '../constants';
+
+interface Resource {
+  id: string;
+  title: string;
+  url: string;
+  description: string;
+}
 
 const Resources: React.FC = () => {
   const [activeText, setActiveText] = useState<{title: string, content: string} | null>(null);
+  const [customResources, setCustomResources] = useState<Resource[]>([]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('custom_resources');
+    if (saved) {
+      setCustomResources(JSON.parse(saved));
+    }
+  }, []);
 
   const openResource = (title: string) => {
-    if (title === 'Convención de Montevideo') {
-      setActiveText({ title, content: TREATY_TEXTS.montevideo });
-    } else if (title === 'Tratado de Viena') {
-      setActiveText({ title, content: TREATY_TEXTS.vienna });
+    // Si es un recurso custom (PDF subido)
+    const custom = customResources.find(r => r.title === title);
+    if (custom) {
+      window.open(`/pdfs/${custom.url}`, '_blank');
+      return;
+    }
+    
+    // Lógica para textos estáticos
+    if (title.toLowerCase().includes('montevideo')) {
+      setActiveText({ title: 'Convención de Montevideo', content: TREATY_TEXTS.montevideo });
     } else {
-      alert("Este recurso es un PDF descargable (Simulación). Solo los tratados clave están digitalizados en esta demo.");
+      // Fallback para otros textos no digitalizados aún
+      setActiveText({ 
+        title, 
+        content: "Este documento está disponible solo en formato físico en la biblioteca de la Universidad o pendiente de digitalización." 
+      });
     }
   };
 
