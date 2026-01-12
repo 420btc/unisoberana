@@ -1,9 +1,11 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TESTIMONIALS } from '../constants';
 
 const Landing: React.FC = () => {
+  const [showEvidence, setShowEvidence] = useState(false);
+
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -55,6 +57,12 @@ const Landing: React.FC = () => {
               <p>
                 El "nacimiento" dejó de ser el milagro de la vida para convertirse en el acto de registro que crea una <span className="text-gold font-bold">Persona</span> jurídica —una máscara artificial, una entidad sin alma ni espíritu, separada del ser humano vivo.
                 La <span className="text-gold font-bold">Persona</span> (del latín persona = máscara) no es tú: es la ficción que el Estado administra, controla y puede imponer, gravar o incluso "asesinar" simbólicamente.
+                <button 
+                  onClick={() => setShowEvidence(true)}
+                  className="ml-2 text-xs border border-gold/50 text-gold px-2 py-0.5 rounded hover:bg-gold hover:text-navy transition-all align-middle"
+                >
+                  Ver Evidencia Jurídica (RAE)
+                </button>
               </p>
             </div>
           </div>
@@ -126,7 +134,7 @@ const Landing: React.FC = () => {
         </div>
       </section>
 
-      {/* Citas / Testimonios (Mantenido) */}
+      {/* Citas / Testimonios */}
       <section className="py-20 bg-black/30">
         <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8">
           {TESTIMONIALS.map((t, idx) => (
@@ -140,6 +148,75 @@ const Landing: React.FC = () => {
           ))}
         </div>
       </section>
+
+      {/* Modal Bloqueado de Evidencia */}
+      {showEvidence && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md">
+          <div className="bg-white rounded-lg w-full max-w-4xl h-[80vh] flex flex-col relative shadow-2xl shadow-gold/20 overflow-hidden border-2 border-gold animate-in fade-in zoom-in duration-300">
+            <div className="bg-navy p-4 flex justify-between items-center border-b border-gold">
+              <h3 className="text-gold font-bold flex items-center gap-2">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.2-2.85.577-4.147M5.106 18.853c.633-.762 1.104-1.574 1.402-2.399m1.272-5.756A10.038 10.038 0 0112 5c2.618 0 5.006.992 6.848 2.584"></path></svg>
+                EVIDENCIA: Diccionario Panhispánico del Español Jurídico (RAE)
+              </h3>
+              <button 
+                onClick={() => setShowEvidence(false)}
+                className="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700 transition-colors font-bold text-sm"
+              >
+                CERRAR EVIDENCIA
+              </button>
+            </div>
+            <div className="flex-1 bg-white relative overflow-y-auto p-8">
+              {/* Simulación de la página de la RAE para evitar bloqueo X-Frame-Options */}
+              <div className="max-w-3xl mx-auto font-serif text-gray-800">
+                <div className="border-b border-red-800 pb-4 mb-6">
+                  <h1 className="text-3xl font-bold text-red-800">Diccionario panhispánico del español jurídico</h1>
+                  <p className="text-sm text-gray-500 mt-1">Real Academia Española</p>
+                </div>
+                
+                <div className="mb-8">
+                  <h2 className="text-4xl font-bold text-navy mb-4">nacimiento</h2>
+                  
+                  <div className="space-y-6">
+                    <div className="pl-4 border-l-4 border-gray-300">
+                      <div className="flex items-baseline gap-2 mb-1">
+                        <span className="bg-red-800 text-white text-xs px-1.5 py-0.5 rounded font-bold">1.</span>
+                        <span className="text-sm font-bold text-gray-500 uppercase tracking-wide">Civ.</span>
+                      </div>
+                      <p className="text-lg leading-relaxed">
+                        Hecho jurídico determinante de la adquisición de la <span className="bg-yellow-200 px-1 font-bold">personalidad jurídica</span>, que tiene lugar una vez producido el entero desprendimiento del seno materno.
+                      </p>
+                      <p className="text-sm text-gray-500 mt-2 italic">CC, arts. 29 y 30.</p>
+                    </div>
+
+                    <div className="pl-4 border-l-4 border-gray-300">
+                      <div className="flex items-baseline gap-2 mb-1">
+                        <span className="bg-red-800 text-white text-xs px-1.5 py-0.5 rounded font-bold">2.</span>
+                        <span className="text-sm font-bold text-gray-500 uppercase tracking-wide">Pen.</span>
+                      </div>
+                      <p className="text-lg leading-relaxed">
+                        Momento que determina el cese de la protección de la vida humana a través del delito de aborto y el inicio de su protección por medio del delito de homicidio o de asesinato.
+                      </p>
+                      <p className="text-sm text-gray-500 mt-2 italic">CP, arts. 138 y 144 y sigs.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gray-100 p-4 rounded text-sm text-gray-600 mt-12">
+                  <p className="font-bold mb-2">Nota de la Universidad Soberana:</p>
+                  <p>Esta es una transcripción fiel de la definición oficial. La RAE bloquea la inserción directa de su web en otras plataformas. Puedes verificar la fuente original aquí:</p>
+                  <a href="https://dpej.rae.es/lema/nacimiento" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline break-all mt-1 block">
+                    https://dpej.rae.es/lema/nacimiento
+                  </a>
+                </div>
+              </div>
+
+              <div className="fixed bottom-0 left-0 right-0 bg-gold/90 text-navy text-center text-xs p-2 font-bold z-10">
+                NOTA: Observa cómo el "nacimiento" se define como un HECHO JURÍDICO de adquisición de PERSONALIDAD (Ficción), no de VIDA.
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
